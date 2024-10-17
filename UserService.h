@@ -12,13 +12,6 @@ class UserService {
 public:
     void createUser( User * user){
 
-        if(user.등급 == seller){
-
-        }
-        else if( user.등급 == 특급회원){
-
-
-        }
         if(user-> canRegister()){
             std::cout << " 회원가입 가능 " << std::endl;
         }
@@ -27,7 +20,11 @@ public:
         }
     }
 
-    void sellerMethod( Seller * s){};
+    User getUser( long userId){};
+
+    void updateUser( User user){};
+
+    void deleteUser( long userId){};
 };
 
 
