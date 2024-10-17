@@ -9,7 +9,7 @@
 #include <iostream>
 class User{
 
-    long long userId;
+    long userId;
     std::string userName;
     std::string userPw;
 
