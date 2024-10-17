@@ -5,6 +5,7 @@
 #ifndef BAEMIN_SELLER_H
 #define BAEMIN_SELLER_H
 #include "User.h"
+#include "Customer.h"
 class Seller : public User{
 
     std::string sellingaddress;
@@ -24,7 +25,7 @@ public:
 
     if(user->canRegister()){
 
-        register()
+         //register();
 
     }
 
