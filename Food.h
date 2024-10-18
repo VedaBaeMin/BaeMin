@@ -6,15 +6,18 @@
 #define BAEMIN_FOOD_H
 #include <string>
 
-class Food {
+using namespace std;
 
+class Food {
+private:
     long foodId;
     long orderId;
     long foodCount;
     long price;
-    std::string foodName;
-
-
+    string foodName;
+public:
+    Food(long foodID, long orderID, long foodCount=0, long price=0, string foodName="");
+    long getFoodId();
 };
 
 

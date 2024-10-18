@@ -7,10 +7,15 @@
 
 #include "Order.h"
 #include "OrderRequest.h"
+#include <vector>
+#include <algorithm>
+using namespace std;
+
 class OrderService {
+     vector<Order> orderlist;
 
      void createOrder(OrderRequest request);
-     Order readOrder();
+     Order readOrder(long orderId);
      void updateOrder(Order order);
      void deleteOrder(long orderId);
 

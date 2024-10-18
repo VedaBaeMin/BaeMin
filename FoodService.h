@@ -5,14 +5,21 @@
 #ifndef BAEMIN_FOODSERVICE_H
 #define BAEMIN_FOODSERVICE_H
 
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
 #include "Food.h"
 
 class FoodService {
-
-    void createFood();
-    Food readFood( long foodId);
-    void updateFood( Food food);
-    void deleteFood( long foodId);
+    vector<Food> foodlist;
+public:
+    void showList();
+    void createFood(long foodId, long orderId);
+    Food readFood(long foodId);
+    void updateFood(Food food);
+    void deleteFood(long foodId);
 };
 
 
