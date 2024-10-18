@@ -8,6 +8,7 @@
 #include "Order.h"
 #include "OrderRequest.h"
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 class OrderService {
