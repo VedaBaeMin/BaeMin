@@ -6,7 +6,7 @@
 #define BAEMIN_CUSTOMER_H
 
 #include "User.h"
-
+#include <string>
 class Customer : public User{
 
     std::string address;
