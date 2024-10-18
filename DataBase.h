@@ -41,10 +41,10 @@ class DataBase {
 
 public:
     // T 타입 객체를 shared_ptr로 변환해 저장
-    void save(const T& t) {
+    void save(const std::shared_ptr<T>& t) {
         std::lock_guard<std::mutex> lock(dbMutex); // DB 접근 잠금
         Element<T> element;
-        element.data = std::make_shared<T>(t); // 객체 복사
+        element.data = t; // shared_ptr를 직접 저장
         DB.push_back(std::move(element)); // 요소 추가
     }
 
