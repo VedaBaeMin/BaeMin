@@ -20,7 +20,7 @@ class Order {
     // string Date;
     OrderStatus status;
 public:
-    Order(long orderId, long sellerId, long customerId, OrderStatus status);
+    Order(long orderId, long sellerId, long customerId, OrderStatus status=PENDING);
     long gerOrderId();
 };
 
