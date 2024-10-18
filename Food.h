@@ -16,7 +16,7 @@ private:
     long price;
     string foodName;
 public:
-    Food(long foodID, long orderID, long foodCount=0, long price=0);
+    Food(long foodID, long orderID, long foodCount=0, long price=0, string foodName="");
     long getFoodId();
 };
 
