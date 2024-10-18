@@ -7,7 +7,7 @@
 
 enum OrderStatus{
     PENDING,
-    PROCEDDING,
+    PROCEEDING,
     FINISHED
 };
 
@@ -19,11 +19,9 @@ class Order {
     long customerId;
     // string Date;
     OrderStatus status;
-
-    void update();
-
-
-
+public:
+    Order(long orderId, long sellerId, long customerId, OrderStatus status);
+    long gerOrderId();
 };
 
 
