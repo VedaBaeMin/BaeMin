@@ -8,6 +8,8 @@
 #include "../Order.h"
 #include "../../DataBase.h"
 #include "../Request/OrderRequest.h"
+#include "../../Food/Service/FoodService.h"
+#include "../../User/Service/UserService.h"
 #include <vector>
 #include <algorithm>
 
@@ -15,12 +17,17 @@ using namespace std;
 
 class OrderService {
     DataBase<Order> orderDataBase;
+    FoodService &foodService;
+    UserService &userService;
      void createOrder(OrderRequest request);
      shared_ptr<Order> readOrder(long orderId);
      void updateOrder(shared_ptr<Order> order);
      void deleteOrder(long orderId);
 
 
+     OrderService(FoodService & foodService, UserService & userService):foodService(foodService),userService(userService){
+
+     }
 
 };
 

@@ -6,10 +6,17 @@
 
 void OrderService::createOrder(OrderRequest request) {
 
-    const long orderDatbaseIndex = orderDataBase.currentIdx() + 1;
-    const shared_ptr<Order> &order = request.toOrder(orderDatbaseIndex);
-    orderDataBase.save(order);
+    const shared_ptr<Food> &food = foodService.readFood(request.getFoodId());
+    const shared_ptr<Customer>& customer = dynamic_pointer_cast<Customer>(userService.getUser(request.getCustomerId()));
 
+    //todo : 예외처리 해야함
+    if(customer == nullptr) return;
+
+    long totalPrice = food->getFoodPrice() *request.getOrderCount();
+
+    totalPrice *= totalPrice/ 100 *(customer->getTotalDiscountRate());
+
+    orderDataBase.save(request.toOrder(totalPrice,orderDataBase.currentIdx()+1));
     return;
 
 }
