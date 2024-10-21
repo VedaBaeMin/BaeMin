@@ -21,7 +21,7 @@ class OrderService {
     UserService &userService;
      void createOrder(OrderRequest request);
      shared_ptr<Order> readOrder(long orderId);
-     void updateOrder(shared_ptr<Order> order);
+     void updateOrderStatus(long OrderId,OrderStatus status);
      void deleteOrder(long orderId);
 
 

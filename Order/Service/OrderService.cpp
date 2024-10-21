@@ -27,7 +27,9 @@ void OrderService::deleteOrder(long orderId) {
     return;
 }
 
-void OrderService::updateOrder(shared_ptr<Order> order) {
+void OrderService::updateOrderStatus(long orderId,OrderStatus status) {
+    const shared_ptr<Order> &order = orderDataBase.find(orderId);
+    order->updateOrderStatus(status);
     orderDataBase.update(order);
 }
 
