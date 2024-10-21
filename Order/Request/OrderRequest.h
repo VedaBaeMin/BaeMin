@@ -6,30 +6,44 @@
 #define BAEMIN_ORDERREQUEST_H
 #include <vector>
 #include "../Order.h"
-#include "../../FoodWithOrder/FoodWithOrder.h"
-struct foodWithCount{
-    long foodId;
-    long foodCount;
-    foodWithCount(long id, long count) : foodId(id), foodCount(count) {}
-};
+
 class OrderRequest {
 
+
+    long orderCount;
+    long foodId;
     long sellerId;
     long customerId;
-    std::vector<foodWithCount> foodList;
+    // 주문 시 갱신되는 부분
+    long total = 0;
+    long orderId = -1;
 
     // 생성자
-    OrderRequest(long sellerId, long customerId):sellerId(sellerId), customerId(customerId){
+    OrderRequest(long sellerId, long customerId, long foodId, long orderCount):sellerId(sellerId), customerId(customerId), foodId(foodId),orderCount(orderCount){
 
     }
-    // 음식 추가 메서드
-    void addFood(long foodId, long foodcount) {
-        foodList.emplace_back(foodId, foodcount);
-    }
+
 
 public:
-    std::shared_ptr<Order> toOrder(long orderId);
-    std::vector<std::shared_ptr<FoodWithOrder>> toFoodWithOrder(long foodWithOrderIndex, long orderIdx);
+    long getCustomerId() const {
+        return customerId;
+    }
+
+    long getSellerId() const {
+        return sellerId;
+    }
+
+    long getFoodId() const {
+        return foodId;
+    }
+
+    long getOrderCount() const {
+        return orderCount;
+    }
+
+    std::shared_ptr<Order> toOrder(long total, long orderId ){
+        return std::make_shared<Order>(orderId,orderCount,foodId,sellerId,total,customerId);
+    }
 };
 
 
