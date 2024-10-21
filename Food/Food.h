@@ -27,6 +27,7 @@ public:
     long getId();
     Food(long foodId, long price, string foodName);
     long getFoodId();
+    virtual long getFoodPrice() = 0;
 };
 
 
