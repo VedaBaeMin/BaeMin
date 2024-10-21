@@ -6,8 +6,8 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(BaeMin main.cpp
         User/Service/UserService.h
         User/Service/UserService.cpp
-        User/User.h
-        User/Seller.h
+        User/Type/User.h
+        User/Type/Seller/Seller.h
         Order/Service/OrderService.h
         Order/Service/OrderService.cpp
         Food/Food.h
