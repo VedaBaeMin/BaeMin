@@ -16,15 +16,24 @@ class Order {
 
     long orderId;
     long orderCount;
+    long foodId;
     long total;
     long sellerId;
     long customerId;
     // string Date;
-    OrderStatus status;
+    OrderStatus status = PENDING;
 public:
+
+
+    Order(long orderId, long orderCount, long foodId, long sellerId, long total, long customerId);
+
     long getId(){ return orderId; }
-    Order(long orderId, long sellerId, long customerId, OrderStatus status=PENDING);
+    void setOrderId(long orderId){};
+    long calculateOrder();
     long gerOrderId();
+    void updateOrderStatus(OrderStatus status){
+        this->status = status;
+    }
 };
 
 

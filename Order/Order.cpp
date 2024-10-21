@@ -4,12 +4,9 @@
 
 #include "Order.h"
 
-Order::Order(long orderId, long sellerId, long customerId, OrderStatus status) {
-    this->orderId=orderId;
-    this->sellerId=sellerId;
-    this->customerId=customerId;
-}
-
 long Order::gerOrderId() {
     return this->orderId;
 }
+
+Order::Order(long orderId, long orderCount, long foodId, long sellerId, long total, long customerId)
+: orderId(orderId),orderCount(orderCount),foodId(foodId),sellerId(sellerId),total(total),customerId(customerId) {}
