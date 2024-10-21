@@ -5,7 +5,7 @@
 #ifndef BAEMIN_CUSTOMER_H
 #define BAEMIN_CUSTOMER_H
 
-#include "User.h"
+#include "../User.h"
 #include <string>
 class Customer : public User{
 
@@ -19,6 +19,10 @@ class Customer : public User{
     void updatePostCode(int postCode){
         this-> postCode = postCode;
     };
+
+    virtual float getTotalDiscountRate() = 0;
+
+
 
 
 

@@ -4,8 +4,8 @@
 
 #ifndef BAEMIN_SELLER_H
 #define BAEMIN_SELLER_H
-#include "User.h"
-#include "Customer.h"
+#include "../User.h"
+#include "../Customer/Customer.h"
 class Seller : public User{
 
     std::string sellingaddress;
