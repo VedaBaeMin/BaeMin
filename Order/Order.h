@@ -15,11 +15,14 @@ enum OrderStatus{
 class Order {
 
     long orderId;
+    long orderCount;
+    long total;
     long sellerId;
     long customerId;
     // string Date;
     OrderStatus status;
 public:
+    long getId(){ return orderId; }
     Order(long orderId, long sellerId, long customerId, OrderStatus status=PENDING);
     long gerOrderId();
 };

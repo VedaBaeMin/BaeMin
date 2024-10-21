@@ -10,15 +10,18 @@
 #include <algorithm>
 using namespace std;
 
-#include "Food.h"
+#include "../Food.h"
+#include "../../DataBase.h"
+#include "../Request/FoodRequest.h"
 
 class FoodService {
-    vector<Food> foodlist;
+    DataBase<Food> foodDataBase;
+
 public:
     void showList();
-    void createFood(long foodId, long orderId);
-    Food readFood(long foodId);
-    void updateFood(Food food);
+    void createFood(FoodRequest request);
+    shared_ptr<Food> readFood(long foodId);
+    void updateFood(shared_ptr<Food> food);
     void deleteFood(long foodId);
 };
 

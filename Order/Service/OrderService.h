@@ -5,18 +5,19 @@
 #ifndef BAEMIN_ORDERSERVICE_H
 #define BAEMIN_ORDERSERVICE_H
 
-#include "Order.h"
-#include "OrderRequest.h"
+#include "../Order.h"
+#include "../../DataBase.h"
+#include "../Request/OrderRequest.h"
 #include <vector>
 #include <algorithm>
+
 using namespace std;
 
 class OrderService {
-     vector<Order> orderlist;
-
+    DataBase<Order> orderDataBase;
      void createOrder(OrderRequest request);
-     Order readOrder(long orderId);
-     void updateOrder(Order order);
+     shared_ptr<Order> readOrder(long orderId);
+     void updateOrder(shared_ptr<Order> order);
      void deleteOrder(long orderId);
 
 

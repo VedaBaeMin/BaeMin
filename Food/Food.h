@@ -9,14 +9,23 @@
 using namespace std;
 
 class Food {
+
+
+
 private:
     long foodId;
-    long orderId;
-    long foodCount;
     long price;
     string foodName;
 public:
-    Food(long foodID, long orderID, long foodCount=0, long price=0, string foodName="");
+    long getPrice() const;
+    const string &getFoodName() const;
+
+    void setPrice(long price);
+
+    void setFoodName(const string &foodName);
+
+    long getId();
+    Food(long foodId, long price, string foodName);
     long getFoodId();
 };
 

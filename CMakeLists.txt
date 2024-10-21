@@ -4,15 +4,17 @@ project(BaeMin)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(BaeMin main.cpp
-        UserService.h
-        UserService.cpp
-        User.h
-        Seller.h
-        OrderService.h
-        OrderService.cpp
-        Food.h
-        Food.cpp
-        Order.h
-        Order.cpp
+        User/Service/UserService.h
+        User/Service/UserService.cpp
+        User/User.h
+        User/Seller.h
+        Order/Service/OrderService.h
+        Order/Service/OrderService.cpp
+        Food/Food.h
+        Food/Food.cpp
+        Order/Order.h
+        Order/Order.cpp
         DataBase.h
+        Food/Service/FoodService.cpp
+        Order/Request/OrderRequest.cpp
 )
