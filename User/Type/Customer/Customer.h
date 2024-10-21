@@ -20,7 +20,7 @@ class Customer : public User{
         this-> postCode = postCode;
     };
 
-    virtual float getTotalDiscountRate() = 0;
+
 
 
 
@@ -35,6 +35,7 @@ public:
         User::canRegister();
         return true;
     };
+    virtual float getTotalDiscountRate() = 0;
 };
 
 #endif //BAEMIN_CUSTOMER_H
