@@ -49,6 +49,7 @@ public:
     }
 
     // 특정 ID를 가진 요소를 찾는 함수
+    // 찾지 못하면 널포인터를 반환
     std::shared_ptr<T> find(long id) {
         std::lock_guard<std::mutex> lock(dbMutex); // DB 접근 잠금
         auto it = std::find_if(DB.begin(), DB.end(), [id](Element<T>& elem) {
@@ -63,6 +64,7 @@ public:
         return nullptr; // 찾지 못하면 nullptr 반환
     }
 
+    // 데이터 업데이트
     void update(std::shared_ptr<T> t) {
         std::lock_guard<std::mutex> lock(dbMutex); // DB 접근 잠금
         auto it = std::find_if(DB.begin(), DB.end(), [t](Element<T>& elem) {
@@ -76,6 +78,7 @@ public:
         }
     }
 
+    // 삭제 요청한 객체가 vector 안에 없다면 아무 행동도 하지 않음
     void remove(long id) {
         std::lock_guard<std::mutex> lock(dbMutex); // DB 접근 잠금
         DB.erase(std::remove_if(DB.begin(), DB.end(),
