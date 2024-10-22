@@ -16,29 +16,13 @@ public:
                                                                      sellingaddress(sellingaddress),
                                                                      sellingpostcode(sellingpostcode) {}
 
-    bool canRegister() override {
-        return false;
-
-    }
 
     void addUser( Customer * user){
-
-    if(user->canRegister()){
-
-         //register();
-
-    }
 
 
 }
 
-    bool canUpdate(int userId) override {
-        return User::canUpdate(userId);
-    }
-
-    bool canDelete(int userId) override {
-        return User::canDelete(userId);
-    }
+    ~Seller() override {};
 };
 
 

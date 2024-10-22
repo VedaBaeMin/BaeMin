@@ -31,11 +31,9 @@ public:
             : User(userId, userName, userPw),  // User의 생성자 호출
               address(address), postCode(postCode)
               {}
-    bool canRegister() override{
-        User::canRegister();
-        return true;
-    };
-    virtual float getTotalDiscountRate() = 0;
+
+    ~Customer() override {};
+    virtual float getTotalDiscountRate() const = 0;
 };
 
 #endif //BAEMIN_CUSTOMER_H
