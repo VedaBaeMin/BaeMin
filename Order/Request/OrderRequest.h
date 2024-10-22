@@ -18,11 +18,6 @@ class OrderRequest {
     long total = 0;
     long orderId = -1;
 
-    // 持失切
-    OrderRequest(long sellerId, long customerId, long foodId, long orderCount):sellerId(sellerId), customerId(customerId), foodId(foodId),orderCount(orderCount){
-
-    }
-
 
 public:
     long getCustomerId() const {
@@ -44,6 +39,11 @@ public:
     std::shared_ptr<Order> toOrder(long total, long orderId ){
         return std::make_shared<Order>(orderId,orderCount,foodId,sellerId,total,customerId);
     }
+
+// 持失切
+OrderRequest(long sellerId, long customerId, long foodId, long orderCount):sellerId(sellerId), customerId(customerId), foodId(foodId),orderCount(orderCount){
+
+}
 };
 
 
