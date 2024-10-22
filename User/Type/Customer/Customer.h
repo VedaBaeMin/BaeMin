@@ -20,12 +20,8 @@ class Customer : public User{
         this-> postCode = postCode;
     };
 
-
-
-
-
-
-
+public:
+    virtual void updateUserInfo()= 0;
 public:
     Customer(long long userId, const std::string& userName, const std::string& userPw, const std::string& address, int postCode)
             : User(userId, userName, userPw),  // User의 생성자 호출
