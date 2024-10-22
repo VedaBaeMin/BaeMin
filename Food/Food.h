@@ -19,15 +19,13 @@ private:
 public:
     long getPrice() const;
     const string &getFoodName() const;
-
     void setPrice(long price);
-
     void setFoodName(const string &foodName);
-
     long getId();
     Food(long foodId, long price, string foodName);
     long getFoodId();
-    virtual long getFoodPrice() = 0;
+    virtual const long getFoodPrice() const = 0;
+
 };
 
 
