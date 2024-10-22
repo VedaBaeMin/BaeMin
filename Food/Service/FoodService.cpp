@@ -11,7 +11,7 @@ void FoodService::createFood(FoodRequest request) {
 
 }
 
-shared_ptr<Food> FoodService::readFood(long foodId) {
+const shared_ptr<const Food> FoodService::readFood(long foodId) {
     return foodDataBase.find(foodId);
 }
 

@@ -20,7 +20,7 @@ class FoodService {
 public:
     void showList();
     void createFood(FoodRequest request);
-    shared_ptr<Food> readFood(long foodId);
+    const shared_ptr<const Food> readFood(long foodId);
     void updateFood(shared_ptr<Food> food);
     void deleteFood(long foodId);
 };
