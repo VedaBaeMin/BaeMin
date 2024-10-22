@@ -49,7 +49,7 @@ public:
     }
 
     // 특정 ID를 가진 요소를 찾는 함수
-    // 찾지 못하면 널포인터를 반환
+    // 찾지 못하면 nullptr 반환
     std::shared_ptr<T> find(long id) {
         std::lock_guard<std::mutex> lock(dbMutex); // DB 접근 잠금
         auto it = std::find_if(DB.begin(), DB.end(), [id](Element<T>& elem) {
@@ -58,8 +58,8 @@ public:
         });
 
         if (it != DB.end()) {
-            // 객체의 복사본을 생성하여 반환
-            return std::make_shared<T>(*(it->data)); // 복사본 생성
+            // 찾은 객체의 포인터를 반환
+            return it->data; // 객체의 포인터를 반환
         }
         return nullptr; // 찾지 못하면 nullptr 반환
     }
