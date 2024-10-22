@@ -5,8 +5,8 @@
 #ifndef BAEMIN_USERSERVICE_H
 #define BAEMIN_USERSERVICE_H
 
-#include "../User.h"
-#include "../Seller.h"
+#include "../Type/User.h"
+#include "../Type/Seller/Seller.h"
 class UserService {
 
 public:

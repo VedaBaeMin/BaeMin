@@ -6,6 +6,7 @@
 #define BAEMIN_FOODREQUEST_H
 
 #include <string>
+#include <memory>
 #include "../Food.h"
 class FoodRequest {
     long price;
