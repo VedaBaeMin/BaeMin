@@ -7,15 +7,29 @@
 
 #include <string>
 #include "../Food.h"
+#include "../FreshFood.h"
+#include "../FrozenFood.h"
+enum FoodType{
+    FRESH,
+    FROZEN
+};
+
 class FoodRequest {
     long price;
     std::string foodName;
+    FoodType type;
 
 public:
-    FoodRequest(long price, std::string foodName):price(price), foodName(foodName){};
+    FoodRequest(long price, std::string foodName,FoodType type):price(price), foodName(foodName),type(type){};
 
      shared_ptr<Food> toFood(long foodIdx){
-         return make_shared<Food>(foodIdx,price,foodName);
+         if(type == FRESH){
+             return make_shared<FreshFood>(foodIdx,price,foodName);
+         }
+         else if(type == FROZEN){
+             return make_shared<FrozenFood>(foodIdx,price,foodName);
+         }
+
      }
 
 };
