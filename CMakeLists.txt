@@ -17,4 +17,10 @@ add_executable(BaeMin main.cpp
         DataBase.h
         Food/Service/FoodService.cpp
         Order/Request/OrderRequest.cpp
+        User/Type/Customer/NewbieUser.h
+        User/Type/Customer/NewbieUser.cpp
+        User/Type/Customer/NormalUser.h
+        User/Type/Customer/NormalUser.cpp
+        Food/FreshFood.cpp
+        Food/FrozenFood.cpp
 )
