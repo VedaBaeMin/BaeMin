@@ -1,20 +1,25 @@
 #include <iostream>
 
-#include "Customer.h"
-#include "Seller.h"
-#include "UserService.h"
+#include "User/Type/Customer/Customer.h"
+#include "User/Type/Seller/Seller.h"
+#include "User/Service/UserService.h"
+#include "Food/Request/FoodRequest.h"
+#include "Food/Service/FoodService.h"
 int main() {
 
-    Customer * c = new Customer(1,"hello","112", "test",10123);
-//    Seller * s = new Seller(2,"seller", "test", "hello3", 10231);
+    FoodRequest request(1000,"helloFood",FROZEN);
+    FoodService foodService;
+    foodService.createFood(request);
+    const  shared_ptr<const Food> &ptr = foodService.readFood(1);
+    if(ptr != nullptr) std::cout <<  ptr->getFoodName() << std::endl;
+    else cout<< "hello" << endl;
+    cout << ptr->getFoodPrice() << endl;
 
-// 요청이 들어오면
-    UserService userService;
-    userService.createUser(c);
 
+//    foodService.updateFood(ptr);
 
-
-    std::cout << "Hello, World!" << std::endl;
+//    const shared_ptr<Food> &ptr2 = foodService.readFood(1);
+//    if(ptr != nullptr) std::cout <<  ptr2->getFoodName() << std::endl;
     return 0;
 
 
