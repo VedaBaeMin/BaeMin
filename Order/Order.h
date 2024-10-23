@@ -34,6 +34,12 @@ public:
     void updateOrderStatus(OrderStatus status){
         this->status = status;
     }
+
+     long getOrderId() const;
+
+    long getOrderCount() const;
+
+    long getTotal() const;
 };
 
 
