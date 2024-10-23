@@ -12,6 +12,9 @@ class NewbieUser : public Customer {
     int discountCount = 0;
 
 public:
+    NewbieUser(long long int userId, const std::string &userName, const std::string &userPw, const std::string &address,
+               int postCode, int discountCount);
+
     void updateUserInfo() override;
 
     float getTotalDiscountRate() const override;
