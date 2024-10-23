@@ -22,13 +22,9 @@ public:
         this->userName = name;
     }
     std::string getname(){
-        return userName;
     }
     User( long long userId, std::string userName, std::string userPw)
             :userId(userId), userPw(userPw), userName(userName){
-
-        std::cout << "부모 호출" << std::endl;
-
     }
 
     virtual ~User() {

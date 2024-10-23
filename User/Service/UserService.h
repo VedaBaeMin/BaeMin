@@ -14,14 +14,14 @@ class UserService {
     void createUser( User * user);
 public:
 
-    void join(){
-
+    void join(std::shared_ptr<User> user){
+        userDatabase.save(user);
     }
 
     void login(){};
 
     const std::shared_ptr<const User> getUser( long userId){
-
+        return userDatabase.find(userId);
     };
 
     const std::shared_ptr<const Customer> getCustomer(long customerId){};
