@@ -2,12 +2,7 @@ cmake_minimum_required(VERSION 3.28)
 project(BaeMin)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
-
 set(CMAKE_PREFIX_PATH "C:/Qt/6.5.3/mingw_64")
-
 find_package(Qt6 COMPONENTS
         Core
         Gui
@@ -35,8 +30,13 @@ add_executable(BaeMin main.cpp
         User/Type/Customer/NormalUser.cpp
         Food/FreshFood.cpp
         Food/FrozenFood.cpp
-        Food/Request/FoodRequest.h
 )
+
+# MOC 설정
+set_target_properties(BaeMin PROPERTIES
+        AUTOMOC ON  # MOC 활성화
+)
+
 target_link_libraries(BaeMin
         Qt::Core
         Qt::Gui

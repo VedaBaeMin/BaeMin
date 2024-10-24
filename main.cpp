@@ -1,38 +1,119 @@
-#include <iostream>
+    #include <iostream>
 
-#include "User/Type/Customer/Customer.h"
-#include "User/Type/Seller/Seller.h"
-#include "User/Service/UserService.h"
-#include "Food/Request/FoodRequest.h"
-#include "Food/Service/FoodService.h"
-#include "Order/Service/OrderService.h"
+    #include "User/Type/Customer/Customer.h"
+    #include "User/Type/Seller/Seller.h"
+    #include "User/Service/UserService.h"
+    #include "Food/Request/FoodRequest.h"
+    #include "Food/Service/FoodService.h"
+    #include "Order/Service/OrderService.h"
+    #include "User/Type/Customer/NewbieUser.h"
+    #include <QApplication>
+    #include <QWidget>
+    #include <QCoreApplication>
+    #include <QTcpServer>
+    #include <QTcpSocket>
+    #include <QJsonDocument>
+    #include <QJsonObject>
+    #include <QDebug>
 
-int main() {
+    class MyClass {
+    public:
+        MyClass(const QString &name, int age) : name(name), age(age) {}
+        QString getName() const { return name; }
+        int getAge() const { return age; }
 
-    FoodRequest request(1000,"helloFood",FROZEN);
-    FoodService foodService;
+    private:
+        QString name;
+        int age;
+    };
 
-    foodService.createFood(request);
-    const  shared_ptr<const Food> &ptr = foodService.readFood(1);
-    if(ptr != nullptr) std::cout <<  ptr->getFoodName() << std::endl;
-    cout << ptr->getFoodPrice() << endl;
-    UserService userService;
-    OrderService orderService(foodService,userService);
+    class HttpServer : public QTcpServer {
+    Q_OBJECT
 
-    OrderRequest orderRequest(1,2,1,2);
-    orderService.createOrder(orderRequest);
+    public:
+        HttpServer(QObject *parent = nullptr) : QTcpServer(parent) {
+            connect(this, &QTcpServer::newConnection, this, &HttpServer::handleNewConnection);
+        }
 
-    const shared_ptr<Order> &orderptr = orderService.readOrder(1);
-    cout << orderptr->gerOrderId() << endl;
-    cout << orderptr->getId() << endl;
+    private slots:
+        void handleNewConnection() {
+            QTcpSocket *socket = nextPendingConnection();
+            connect(socket, &QTcpSocket::readyRead, this, &HttpServer::readRequest);
+        }
 
-//    foodService.updateFood(ptr);
+        void readRequest() {
+            QTcpSocket *socket = qobject_cast<QTcpSocket *>(sender());
+            QByteArray requestData = socket->readAll();
 
-//    const shared_ptr<Food> &ptr2 = foodService.readFood(1);
-//    if(ptr != nullptr) std::cout <<  ptr2->getFoodName() << std::endl;
-    return 0;
+            // HTTP 요청을 처리
+            QString requestString(requestData);
+            qDebug() << "Received Request:\n" << requestString;
+
+            // HTTP 요청에서 "\r\n\r\n"을 찾아 헤더와 본문을 분리
+            int headerEndIndex = requestData.indexOf("\r\n\r\n");
+
+            if (headerEndIndex == -1) {
+                // 본문이 없는 잘못된 요청 처리
+                QString httpResponse = "HTTP/1.1 400 Bad Request\r\n"
+                                       "Content-Type: text/plain\r\n"
+                                       "Content-Length: 0\r\n"
+                                       "\r\n";
+                socket->write(httpResponse.toUtf8());
+                socket->disconnectFromHost();
+                return;
+            }
+
+            // 본문 부분을 추출 (JSON 데이터)
+            QByteArray jsonData = requestData.mid(headerEndIndex + 4); // \r\n\r\n 뒤에 있는 데이터를 가져옴
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData);
+
+            if (!jsonDoc.isObject()) {
+                // 유효하지 않은 JSON 데이터 처리
+                QString httpResponse = "HTTP/1.1 400 Bad Request\r\n"
+                                       "Content-Type: text/plain\r\n"
+                                       "Content-Length: 0\r\n"
+                                       "\r\n";
+                socket->write(httpResponse.toUtf8());
+                socket->disconnectFromHost();
+                return;
+            }
+
+            QJsonObject jsonObject = jsonDoc.object();
+
+            // JSON에서 요소 추출
+            //// 여기서 확인 가능
+            QString name = jsonObject["name"].toString();
+            int age = jsonObject["age"].toInt(); // age가 문자열이라면 .toString()으로 받아서 변환해야 함
+
+            qDebug() << "Name:" << name;
+            qDebug() << "Age:" << age;
+
+            ////
+            // 응답 보내기
+            QString response = QString("Name: %1, Age: %2").arg(name).arg(age);
+            QString httpResponse = "HTTP/1.1 200 OK\r\n"
+                                   "Content-Type: text/plain\r\n"
+                                   "Content-Length: %1\r\n"
+                                   "\r\n"
+                                   "%2";
+            socket->write(httpResponse.arg(response.length()).arg(response).toUtf8());
+
+            socket->disconnectFromHost();
+        }
 
 
+    };
 
+    int main(int argc, char *argv[]) {
+        QCoreApplication a(argc, argv);
 
-}
+        HttpServer server;
+        if (!server.listen(QHostAddress::Any, 8080)) {
+            qFatal("Unable to start the server: %s", qPrintable(server.errorString()));
+        }
+        qDebug() << "Server started on port" << server.serverPort();
+
+        return a.exec();
+    }
+
+    #include "main.moc"
