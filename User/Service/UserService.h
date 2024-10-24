@@ -7,24 +7,37 @@
 
 #include "../Type/User.h"
 #include "../Type/Seller/Seller.h"
+#include "../../DataBase.h"
+#include "../Request/UserRegisterRequest.h"
+#include "../Request/UserLoginRequest.h"
+#include "../Type/Customer/NewbieUser.h"
+
 class UserService {
 
+    DataBase<User> userDatabase;
+    void createUser( User * user);
 public:
-    void createUser( User * user){
 
-        if(user-> canRegister()){
-            std::cout << " 회원가입 가능 " << std::endl;
-        }
-        else{
-            std::cout << "회원가입 불가" << std::endl;
-        }
+    void join(const UserRegisterRequest const request){
+        std::shared_ptr<User> userptr = std::make_shared<NewbieUser>(userDatabase.currentIdx()+1,request.getUserName(),request.getUserPw(),"temp",10120,20);
+        userDatabase.save(userptr);
     }
 
-    User getUser( long userId){};
+    void login(){};
 
-    void updateUser( User user){};
+    const std::shared_ptr<const User> getUser( long userId){
+        return userDatabase.find(userId);
+    };
 
-    void deleteUser( long userId){};
+    const std::shared_ptr<const Customer> getCustomer(long customerId){};
+
+    void updateUser( std::shared_ptr<User> user){
+
+    };
+
+    void deleteUser( long userId){
+
+    };
 };
 
 

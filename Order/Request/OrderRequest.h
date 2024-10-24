@@ -14,14 +14,9 @@ class OrderRequest {
     long foodId;
     long sellerId;
     long customerId;
-    // ÁÖ¹® ½Ã °»½ÅµÇ´Â ºÎºÐ
+    // ï¿½Ö¹ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ÅµÇ´ï¿½ ï¿½Îºï¿½
     long total = 0;
     long orderId = -1;
-
-    // »ý¼ºÀÚ
-    OrderRequest(long sellerId, long customerId, long foodId, long orderCount):sellerId(sellerId), customerId(customerId), foodId(foodId),orderCount(orderCount){
-
-    }
 
 
 public:
@@ -44,6 +39,11 @@ public:
     std::shared_ptr<Order> toOrder(long total, long orderId ){
         return std::make_shared<Order>(orderId,orderCount,foodId,sellerId,total,customerId);
     }
+
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+OrderRequest(long sellerId, long customerId, long foodId, long orderCount):sellerId(sellerId), customerId(customerId), foodId(foodId),orderCount(orderCount){
+
+}
 };
 
 

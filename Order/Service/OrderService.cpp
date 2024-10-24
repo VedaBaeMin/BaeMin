@@ -6,17 +6,14 @@
 
 void OrderService::createOrder(OrderRequest request) {
 
-    const shared_ptr<Food> &food = foodService.readFood(request.getFoodId());
-    const shared_ptr<Customer>& customer = dynamic_pointer_cast<Customer>(userService.getUser(request.getCustomerId()));
-
-    //todo : 예외처리 해야함
+    const shared_ptr<const Food> &food = foodService.readFood(request.getFoodId());
+    const std::shared_ptr<const Customer>& customer = std::dynamic_pointer_cast<const Customer>(userService.getUser(request.getCustomerId()));
     if(customer == nullptr) return;
-
     long totalPrice = food->getFoodPrice() *request.getOrderCount();
-
-    totalPrice *= totalPrice/ 100 *(customer->getTotalDiscountRate());
-
+    totalPrice *= (double)((100.0 - customer->getTotalDiscountRate()) / 100.0);
     orderDataBase.save(request.toOrder(totalPrice,orderDataBase.currentIdx()+1));
+
+    std::cout << "success " << std::endl;
     return;
 
 }
@@ -33,7 +30,7 @@ void OrderService::updateOrderStatus(long orderId,OrderStatus status) {
     orderDataBase.update(order);
 }
 
-shared_ptr<Order> OrderService::readOrder(long orderId) {
+const shared_ptr<const Order> OrderService::readOrder(long orderId) {
     std::shared_ptr<Order> order = orderDataBase.find(orderId);
     return order;
 }

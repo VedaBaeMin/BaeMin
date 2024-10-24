@@ -16,19 +16,18 @@
 using namespace std;
 
 class OrderService {
+private:
     DataBase<Order> orderDataBase;
     FoodService &foodService;
     UserService &userService;
-     void createOrder(OrderRequest request);
-     shared_ptr<Order> readOrder(long orderId);
-     void updateOrderStatus(long OrderId,OrderStatus status);
-     void deleteOrder(long orderId);
-
-
+public:
      OrderService(FoodService & foodService, UserService & userService):foodService(foodService),userService(userService){
 
      }
-
+     const shared_ptr<const Order> readOrder(long orderId);
+    void updateOrderStatus(long OrderId,OrderStatus status);
+    void deleteOrder(long orderId);
+    void createOrder(OrderRequest request);
 };
 
 
