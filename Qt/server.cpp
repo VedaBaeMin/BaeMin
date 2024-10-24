@@ -15,7 +15,6 @@ void Server::onNewConnection() {
     connect(clientSocket, &QTcpSocket::readyRead, this, &Server::onReadyRead);
     connect(clientSocket, &QTcpSocket::disconnected, this, &Server::onClientDisconnected);
     clients.append(clientSocket);
-    cout << "A new client connected!"<<endl;
 }
 
 void Server::onReadyRead() {
@@ -29,13 +28,25 @@ void Server::onReadyRead() {
     string message = json["message"].toString().toStdString();
     cout<<"status : "<<status<<endl;
     cout<<"message : "<<message<<endl;
+
+    this->request = data;
+    r_flag = true;
+    condition.wakeOne(); // 대기 중인 스레드 깨우기
 }
 
 void Server::onClientDisconnected() {
     QTcpSocket *clientSocket = qobject_cast<QTcpSocket*>(sender());
     clients.removeAll(clientSocket);
     clientSocket->deleteLater();
-    cout << "A client disconnected!"<<endl;
+}
+
+QByteArray Server::getRequest() {
+    // r_flag가 true가 될 때까지 대기
+    /*while (!r_flag) {
+        ;//condition.wait(&mutex); // 대기
+    }*/
+    r_flag=false;
+    return this->request;
 }
 
 #include "server.moc"

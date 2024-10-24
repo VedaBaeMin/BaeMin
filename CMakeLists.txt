@@ -34,10 +34,11 @@ add_executable(BaeMin main.cpp
         Food/FreshFood.cpp
         Food/FrozenFood.cpp
         Food/Request/FoodRequest.cpp
+        Food/Request/FoodRequest.h
         Qt/client.cpp
         Qt/client.h
-        #Qt/server.cpp
-        #Qt/server.h
+        Qt/server.cpp
+        Qt/server.h
 )
 
 # MOC 설정
