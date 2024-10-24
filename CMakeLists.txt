@@ -2,6 +2,11 @@ cmake_minimum_required(VERSION 3.28)
 project(BaeMin)
 
 set(CMAKE_CXX_STANDARD 17)
+find_package(Qt6 COMPONENTS
+        Core
+        Gui
+        Widgets
+        REQUIRED)
 
 add_executable(BaeMin main.cpp
         User/Service/UserService.h
@@ -23,4 +28,9 @@ add_executable(BaeMin main.cpp
         User/Type/Customer/NormalUser.cpp
         Food/FreshFood.cpp
         Food/FrozenFood.cpp
+)
+target_link_libraries(BaeMin
+        Qt::Core
+        Qt::Gui
+        Qt::Widgets
 )
