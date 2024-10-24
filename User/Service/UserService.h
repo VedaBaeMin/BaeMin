@@ -8,14 +8,19 @@
 #include "../Type/User.h"
 #include "../Type/Seller/Seller.h"
 #include "../../DataBase.h"
+#include "../Request/UserRegisterRequest.h"
+#include "../Request/UserLoginRequest.h"
+#include "../Type/Customer/NewbieUser.h"
+
 class UserService {
 
     DataBase<User> userDatabase;
     void createUser( User * user);
 public:
 
-    void join(std::shared_ptr<User> user){
-        userDatabase.save(user);
+    void join(const UserRegisterRequest const request){
+        std::shared_ptr<User> userptr = std::make_shared<NewbieUser>(userDatabase.currentIdx()+1,request.getUserName(),request.getUserPw(),"temp",10120,20);
+        userDatabase.save(userptr);
     }
 
     void login(){};
