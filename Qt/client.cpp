@@ -1,28 +1,25 @@
+//
+// Created by change10 on 24. 10. 24.
+//
+
 #include "client.h"
-#include <QDebug>
+using namespace std;
 
-Client::Client(QObject *parent) : QObject(parent) {
+Client::Client(QByteArray json) {
+    this->json=json;
     socket = new QTcpSocket(this);
-    connect(socket, &QTcpSocket::readyRead, this, &Client::onReadyRead);
+    connect(socket, &QTcpSocket::connected, this, &Client::onConnected);
+    socket->connectToHost("127.0.0.1", 1234);
 }
 
-void Client::connectToServer(const QString &host, quint16 port) {
-    socket->connectToHost(host, port);
+void Client::onConnected() {
+    if (socket->state() == QAbstractSocket::ConnectedState) {
+        socket->write(json);
+        socket->flush(); // 메시지를 즉시 전송
+    } else {
+        cout<< "Socket is not connected!"<<endl;
+    }
+    socket->disconnectFromHost();
 }
 
-void Client::sendJson() {
-    // JSON 문서 생성
-    QJsonObject jsonObj;
-    jsonObj["name"] = "John Doe";
-    jsonObj["age"] = 30;
-
-    QJsonDocument jsonDoc(jsonObj);
-    QByteArray jsonData = jsonDoc.toJson();
-
-    socket->write(jsonData);  // JSON 데이터 전송
-}
-
-void Client::onReadyRead() {
-    QByteArray data = socket->readAll();
-    qDebug() << "Received from server:" << data;
-}
+#include "client.moc"

@@ -1,25 +1,41 @@
-#include "server.h"
-#include <QDebug>
+//
+// Created by change10 on 24. 10. 24.
+//
 
-Server::Server(QObject *parent) : QTcpServer(parent) {
+#include "server.h"
+using namespace std;
+
+Server::Server() {
     connect(this, &QTcpServer::newConnection, this, &Server::onNewConnection);
-    listen(QHostAddress::Any, 12345);
+    listen(QHostAddress::Any, 1234);
 }
 
 void Server::onNewConnection() {
-    clientSocket = nextPendingConnection();
+    QTcpSocket *clientSocket = nextPendingConnection();
     connect(clientSocket, &QTcpSocket::readyRead, this, &Server::onReadyRead);
-    qDebug() << "Client connected:" << clientSocket->peerAddress().toString();
+    connect(clientSocket, &QTcpSocket::disconnected, this, &Server::onClientDisconnected);
+    clients.append(clientSocket);
+    cout << "A new client connected!"<<endl;
 }
 
 void Server::onReadyRead() {
-    QByteArray data = clientSocket->readAll();
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(data);
+    QTcpSocket *senderSocket = qobject_cast<QTcpSocket*>(sender());
+    QByteArray data = senderSocket->readAll();
 
-    if (!jsonDoc.isNull()) {
-        qDebug() << "Received JSON:" << jsonDoc.toJson();
-        // JSON 처리...
-    } else {
-        qDebug() << "Invalid JSON data.";
-    }
+    // JSON 파싱
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+    QJsonObject json = doc.object();
+    string status = json["status"].toString().toStdString();
+    string message = json["message"].toString().toStdString();
+    cout<<"status : "<<status<<endl;
+    cout<<"message : "<<message<<endl;
 }
+
+void Server::onClientDisconnected() {
+    QTcpSocket *clientSocket = qobject_cast<QTcpSocket*>(sender());
+    clients.removeAll(clientSocket);
+    clientSocket->deleteLater();
+    cout << "A client disconnected!"<<endl;
+}
+
+#include "server.moc"
