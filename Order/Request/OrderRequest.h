@@ -5,6 +5,8 @@
 #ifndef BAEMIN_ORDERREQUEST_H
 #define BAEMIN_ORDERREQUEST_H
 #include <vector>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include "../Order.h"
 
 class OrderRequest {
@@ -20,6 +22,14 @@ class OrderRequest {
 
 
 public:
+    OrderRequest(QByteArray byte){
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(byte);
+        QJsonObject jsonObj = jsonDoc.object();
+        this->orderCount=jsonObj["orderCount"].toInt();
+        this->foodId=jsonObj["foodId"].toInt();
+        this->sellerId=jsonObj["sellerId"].toInt();
+        this->customerId=jsonObj["customerId"].toInt();
+    }
     long getCustomerId() const {
         return customerId;
     }
