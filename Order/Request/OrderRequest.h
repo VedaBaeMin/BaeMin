@@ -5,6 +5,7 @@
 #ifndef BAEMIN_ORDERREQUEST_H
 #define BAEMIN_ORDERREQUEST_H
 #include <vector>
+#include <memory>
 #include "../Order.h"
 
 class OrderRequest {

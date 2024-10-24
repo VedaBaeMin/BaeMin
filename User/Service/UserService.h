@@ -18,7 +18,7 @@ class UserService {
     void createUser( User * user);
 public:
 
-    void join(const UserRegisterRequest const request){
+    void join(const UserRegisterRequest request){
         std::shared_ptr<User> userptr = std::make_shared<NewbieUser>(userDatabase.currentIdx()+1,request.getUserName(),request.getUserPw(),"temp",10120,20);
         userDatabase.save(userptr);
     }
