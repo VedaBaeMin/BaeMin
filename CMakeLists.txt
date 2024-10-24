@@ -6,6 +6,7 @@ find_package(Qt6 COMPONENTS
         Core
         Gui
         Widgets
+        Network
         REQUIRED)
 
 add_executable(BaeMin main.cpp
@@ -29,8 +30,15 @@ add_executable(BaeMin main.cpp
         Food/FreshFood.cpp
         Food/FrozenFood.cpp
 )
+
+# MOC 설정
+set_target_properties(BaeMin PROPERTIES
+        AUTOMOC ON  # MOC 활성화
+)
+
 target_link_libraries(BaeMin
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        Qt::Network
 )
