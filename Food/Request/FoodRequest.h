@@ -27,13 +27,7 @@ class FoodRequest {
 
 public:
     FoodRequest(long price, std::string foodName,FoodType type):price(price), foodName(foodName),type(type){};
-    FoodRequest(QByteArray byte){
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(byte);
-    QJsonObject jsonObj = jsonDoc.object();
-    this->price=jsonObj["price"].toInt();
-    this->foodName=jsonObj["foofName"].toString().toStdString();
-    this->type=stringToFoodType(jsonObj["foofName"].toString().toStdString());
-    }
+    FoodRequest(QByteArray byte);
 
      shared_ptr<Food> toFood(long foodIdx){
          if(type == FRESH){

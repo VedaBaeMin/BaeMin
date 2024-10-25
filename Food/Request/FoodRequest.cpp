@@ -15,3 +15,11 @@ FoodType stringToFoodType(const string& type) {
         return UNKNOWN; // 찾을 수 없는 경우
     }
 }
+
+FoodRequest::FoodRequest(QByteArray byte);{
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(byte);
+    QJsonObject jsonObj = jsonDoc.object();
+    this->price=jsonObj["price"].toInt();
+    this->foodName=jsonObj["foodName"].toString().toStdString();
+    this->type=stringToFoodType(jsonObj["type"].toString().toStdString());
+}
