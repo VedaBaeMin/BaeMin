@@ -16,6 +16,18 @@
     #include <QJsonObject>
     #include <QDebug>
 
+
+     QString handleJson(QJsonObject &jsonObject) {
+        // JSON에서 요소 추출
+        //// 여기서 확인 가능
+        QString type  = jsonObject["type"].toString();
+        qDebug() << "type:" << type;
+
+        return "success";
+
+        ////
+    }
+
     class MyClass {
     public:
         MyClass(const QString &name, int age) : name(name), age(age) {}
@@ -25,7 +37,10 @@
     private:
         QString name;
         int age;
+
     };
+
+
 
     class HttpServer : public QTcpServer {
     Q_OBJECT
@@ -78,19 +93,13 @@
                 return;
             }
 
+
+
             QJsonObject jsonObject = jsonDoc.object();
+            const QString &response = handleJson(jsonObject);
 
-            // JSON에서 요소 추출
-            //// 여기서 확인 가능
-            QString name = jsonObject["name"].toString();
-            int age = jsonObject["age"].toInt(); // age가 문자열이라면 .toString()으로 받아서 변환해야 함
-
-            qDebug() << "Name:" << name;
-            qDebug() << "Age:" << age;
-
-            ////
             // 응답 보내기
-            QString response = QString("Name: %1, Age: %2").arg(name).arg(age);
+           
             QString httpResponse = "HTTP/1.1 200 OK\r\n"
                                    "Content-Type: text/plain\r\n"
                                    "Content-Length: %1\r\n"
@@ -103,6 +112,8 @@
 
 
     };
+
+
 
     int main(int argc, char *argv[]) {
         QCoreApplication a(argc, argv);
