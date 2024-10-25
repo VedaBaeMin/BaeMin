@@ -11,7 +11,7 @@ class FreshFood : public Food {
 public:
     FreshFood(long foodId, long price, const string &foodName);
 
-   const long getFoodPrice() const override;
+   const long getFoodDiscountPercent() const override;
 
 };
 

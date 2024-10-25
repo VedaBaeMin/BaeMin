@@ -3,11 +3,12 @@
 //
 
 #include "FoodService.h"
-
+#include <iostream>
 void FoodService::createFood(FoodRequest request) {
 
     const long foodIndex = foodDataBase.currentIdx()+1;
     foodDataBase.save(request.toFood(foodIndex));
+    std::cout << "food Sucees"<< std::endl;
 
 }
 

@@ -4,7 +4,7 @@
 
 #include "FrozenFood.h"
 
-const long FrozenFood::getFoodPrice() const {
+const long FrozenFood::getFoodDiscountPercent() const {
     return 30;
 }
 

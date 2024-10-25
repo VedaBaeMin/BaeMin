@@ -9,7 +9,7 @@
 
 class UserRegisterRequest {
 
-    std::string userName;
+
 public:
     const std::string &getUserName() const {
         return userName;
@@ -19,9 +19,16 @@ public:
         return userPw;
     }
 
+    UserRegisterRequest(std::string username, std::string userPw):userName(username),userPw(userPw){};
+
 private:
+    std::string userName;
     std::string userPw;
+
+
 };
+
+
 
 
 #endif //BAEMIN_USERREGISTERREQUEST_H

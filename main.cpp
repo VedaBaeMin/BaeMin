@@ -17,11 +17,42 @@
     #include <QDebug>
 
 
+    UserService userService;
+    FoodService foodService;
+    OrderService orderService(foodService,userService);
+
+
+
      QString handleJson(QJsonObject &jsonObject) {
         // JSON에서 요소 추출
         //// 여기서 확인 가능
         QString type  = jsonObject["type"].toString();
         qDebug() << "type:" << type;
+
+        if(type == "foodRequest"){
+            QString foodName =jsonObject["foodName"].toString();
+            qDebug() << foodName;
+
+            FoodRequest request(1000,"food1",FROZEN);
+            foodService.createFood(request);
+
+            // 여기에 만든 객체들로 실행하게
+
+
+        }
+        else if(type == "orderRequest"){
+
+            OrderRequest request(1,1,1,10);
+            orderService.createOrder(request);
+
+
+        }
+        else if(type == "joinRequest"){
+            UserRegisterRequest request("lee","123");
+            userService.join(request);
+        }
+
+
 
         return "success";
 
@@ -117,6 +148,7 @@
 
     int main(int argc, char *argv[]) {
         QCoreApplication a(argc, argv);
+
 
         HttpServer server;
         if (!server.listen(QHostAddress::Any, 8080)) {

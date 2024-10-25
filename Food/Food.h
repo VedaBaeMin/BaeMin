@@ -24,7 +24,7 @@ public:
     long getId();
     Food(long foodId, long price, string foodName);
     long getFoodId();
-    virtual const long getFoodPrice() const = 0;
+    virtual const long getFoodDiscountPercent() const = 0;
 
 };
 

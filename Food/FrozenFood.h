@@ -11,7 +11,7 @@ class FrozenFood :public Food {
 public:
     FrozenFood(long foodId, long price, const string &foodName);
 
-    const long getFoodPrice() const override;
+    const long getFoodDiscountPercent() const override;
 };
 
 

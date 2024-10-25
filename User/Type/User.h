@@ -21,7 +21,8 @@ public:
     void changeName(std::string name){
         this->userName = name;
     }
-    std::string getname(){
+    std::string getname()const{
+        return userName;
     }
     User( long long userId, std::string userName, std::string userPw)
             :userId(userId), userPw(userPw), userName(userName){
