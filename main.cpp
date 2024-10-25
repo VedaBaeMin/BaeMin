@@ -24,8 +24,6 @@
 
 
      QString handleJson(QJsonObject &jsonObject) {
-        // JSON에서 요소 추출
-        //// 여기서 확인 가능
         QString type  = jsonObject["type"].toString();
         qDebug() << "type:" << type;
 
@@ -35,7 +33,6 @@
 
             FoodRequest request(1000,"food1",FROZEN);
             foodService.createFood(request);
-
             // 여기에 만든 객체들로 실행하게
 
 
