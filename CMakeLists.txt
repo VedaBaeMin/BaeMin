@@ -40,15 +40,15 @@ add_executable(BaeMin main.cpp
         User/Type/Customer/NormalUser.h
         User/Type/Seller/Seller.h
         User/Type/User.h
-        loginwindow.cpp
-        loginwindow.h
-        loginwindow.ui
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
-        sellerwindow.cpp
-        sellerwindow.h
-        sellerwindow.ui
+        Qt/loginwindow.cpp
+        Qt/loginwindow.h
+        Qt/loginwindow.ui
+        Qt/mainwindow.cpp
+        Qt/mainwindow.h
+        Qt/mainwindow.ui
+        Qt/sellerwindow.cpp
+        Qt/sellerwindow.h
+        Qt/sellerwindow.ui
 )
 
 # MOC 설정
