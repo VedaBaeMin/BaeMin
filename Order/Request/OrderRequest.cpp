@@ -9,3 +9,11 @@
 //}
 //
 //
+OrderRequest::OrderRequest(QByteArray byte) {
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(byte);
+    QJsonObject jsonObj = jsonDoc.object();
+    this->orderCount=jsonObj["orderCount"].toInt();
+    this->foodId=jsonObj["foodId"].toInt();
+    this->sellerId=jsonObj["sellerId"].toInt();
+    this->customerId=jsonObj["customerId"].toInt();
+}

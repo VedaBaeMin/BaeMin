@@ -6,6 +6,9 @@
 #define BAEMIN_ORDERREQUEST_H
 #include <vector>
 #include <memory>
+#include <string>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include "../Order.h"
 
 class OrderRequest {
@@ -21,6 +24,7 @@ class OrderRequest {
 
 
 public:
+    OrderRequest(QByteArray byte);
     long getCustomerId() const {
         return customerId;
     }
