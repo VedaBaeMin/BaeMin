@@ -5,6 +5,8 @@
 #ifndef BAEMIN_FOOD_H
 #define BAEMIN_FOOD_H
 #include <string>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 using namespace std;
 
@@ -17,6 +19,7 @@ private:
     long price;
     string foodName;
 public:
+    QByteArray makeRequest();
     long getPrice() const;
     const string &getFoodName() const;
     void setPrice(long price);
