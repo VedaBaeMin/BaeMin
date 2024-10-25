@@ -31,7 +31,6 @@ void Server::onReadyRead() {
 
     this->request = data;
     r_flag = true;
-    condition.wakeOne(); // 대기 중인 스레드 깨우기
 }
 
 void Server::onClientDisconnected() {
@@ -43,7 +42,7 @@ void Server::onClientDisconnected() {
 QByteArray Server::getRequest() {
     // r_flag가 true가 될 때까지 대기
     /*while (!r_flag) {
-        ;//condition.wait(&mutex); // 대기
+        ;// 대기
     }*/
     r_flag=false;
     return this->request;

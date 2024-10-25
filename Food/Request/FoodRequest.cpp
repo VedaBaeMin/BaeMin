@@ -16,7 +16,7 @@ FoodType stringToFoodType(const string& type) {
     }
 }
 
-FoodRequest::FoodRequest(QByteArray byte);{
+FoodRequest::FoodRequest(QByteArray byte){
     QJsonDocument jsonDoc = QJsonDocument::fromJson(byte);
     QJsonObject jsonObj = jsonDoc.object();
     this->price=jsonObj["price"].toInt();
