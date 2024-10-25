@@ -15,29 +15,31 @@
 #include <QJsonObject>
 #include "Qt/client.h"
 #include "Qt/server.h"
-#include <unistd.h>
+#include "loginwindow.h"
+#include "mainwindow.h"
+#include "sellerwindow.h"
 
 using namespace std;
 int main(int argc, char *argv[]) {
-    QCoreApplication a(argc, argv);
-    cout<<"hello\n";
-    Server s;
+    QApplication a(argc, argv);
+    /*Server s;
 
-    QJsonObject responseObj;
-    responseObj["status"] = "ok";
-    responseObj["message"] = "Data send";
-    QJsonDocument responseDoc(responseObj);
+    FreshFood test(111,1000,"사과");
+    Client c(test.makeRequest());
 
-    Client c(responseDoc.toJson());
-
-    sleep(3);
     QByteArray byte = s.getRequest();
     QJsonDocument jsonDoc = QJsonDocument::fromJson(byte);
     QJsonObject jsonObj = jsonDoc.object();
-    string status=jsonObj["status"].toString().toStdString();
-    string message=jsonObj["message"].toString().toStdString();
-    cout <<"receive statue : "<<status<<endl;
-    cout <<"receive message : "<<message<<endl;
+
+    int foodid=static_cast<int>(jsonObj["foodId"].toInt());
+    int price=jsonObj["price"].toInt();
+    string foodName=jsonObj["foodName"].toString().toStdString();
+
+    cout <<"receive foodid : "<<foodid<<endl;
+    cout <<"receive price : "<<price<<endl;
+    cout <<"receive foodName : "<<foodName<<endl;*/
+    Mainwindow login;
+    login.show();
 
     return a.exec();
 }
